@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { log } from "console";
 import inquirer from "inquirer";
-import { addEmbeddings, chunkDocument } from "./lib/ai";
+import { addEmbeddings, chunkDocument } from "./lib/ai.js";
 
 log(chalk.blue("Welcome to Next Voters' CLI tooling!"));
 
@@ -35,6 +35,7 @@ try {
             validate: (input) => input.trim() !== "" || "Collection name cannot be empty",
         },
     ]);
+
     const { 
         documentLink, 
         author, 
@@ -70,6 +71,6 @@ try {
     } else {
         throw new Error("The link did not return a PDF document.");
     }
-} catch (error: any) {
+} catch (error) {
     log(chalk.red("AN ERROR OCCURRED!!"), error.message);
 }
