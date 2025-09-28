@@ -56,7 +56,10 @@ try {
     if (contentType.includes("application/pdf")) {
         log(chalk.green("Retrieved PDF document! Continue to processing..."));
 
-        const pdfBuffer = await response.arrayBuffer();
+        // ✅ Convert ArrayBuffer → Buffer for pdf-parse
+        const pdfArrayBuffer = await response.arrayBuffer();
+        const pdfBuffer = Buffer.from(pdfArrayBuffer);
+
         const chunks = await chunkDocument(pdfBuffer);
 
         await addEmbeddings(
